@@ -20,13 +20,14 @@ class HistoryGraph(Callback):
 
     def save_training_history(self, path, history):
         for metric in history:
-            if "val" in metric:
+            if 'val' not in metric:
                 plt.clf()
                 history[metric] = list(map(float, history[metric]))
-                plt.plot(history["val"+metric])
+                plt.plot(history[metric])
+                plt.plot(history['val_'+metric])
                 plt.title('model' + metric)
                 plt.ylabel(metric)
-                plt.xlabel(epoch)
+                plt.xlabel('epoch')
                 plt.legend(['train', 'test'], loc='upper left')
                 plt.gcf().savefig(path+'/'+metric+'history'+'.jpg')
 
